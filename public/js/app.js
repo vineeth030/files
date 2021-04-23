@@ -2035,8 +2035,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log('working!!!!');
       this.$store.dispatch('REMOVE_FILE', file);
     },
-    searchFiles: function searchFiles() {
-      console.log('Searching files....');
+    getFileName: function getFileName(url) {
+      return url.split('/').pop();
     }
   }
 });
@@ -20355,7 +20355,9 @@ var render = function() {
           return _c("tr", [
             _c("td", { domProps: { textContent: _vm._s(index + 1) } }),
             _vm._v(" "),
-            _c("td", { domProps: { textContent: _vm._s(file) } }),
+            _c("td", {
+              domProps: { textContent: _vm._s(_vm.getFileName(file)) }
+            }),
             _vm._v(" "),
             _c("td", [
               _c(

@@ -17,7 +17,7 @@
             <tbody>
             <tr v-for="(file, index) in filteredFiles">
                 <td v-text="index+1"></td>
-                <td v-text="file"></td>
+                <td v-text="getFileName(file)"></td>
                 <td><button @click="deleteFile(file)">Delete</button></td>
             </tr>
             </tbody>
@@ -53,9 +53,9 @@ export default {
             console.log('working!!!!')
             this.$store.dispatch('REMOVE_FILE', file);
         },
-        searchFiles(){
-            console.log('Searching files....');
-
+        getFileName(url)
+        {
+            return url.split('/').pop();
         }
     }
 }
