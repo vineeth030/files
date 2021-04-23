@@ -2,6 +2,9 @@ let mutations = {
     GET_FILES(state, files){
         state.files = files
     },
+    GET_ACTIVITIES(state, activities){
+        state.activities = activities
+    },
     ADD_FILE(state, file){
         state.files = [...state.files, file]
     },

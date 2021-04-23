@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\FileController;
+use App\Http\Controllers\Api\ActivityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +19,5 @@ use App\Http\Controllers\Api\FileController;
 Route::get('files', [FileController::class, 'index']);
 Route::post('files', [FileController::class, 'create']);
 Route::delete('files', [FileController::class, 'delete']);
+
+Route::get('activities', [ActivityController::class, 'index']);

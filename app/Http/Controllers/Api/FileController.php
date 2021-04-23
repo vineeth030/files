@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadFileRequest;
+use App\Models\Activity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -21,7 +22,11 @@ class FileController extends Controller
     public function create(UploadFileRequest $request): \Illuminate\Http\JsonResponse
     {
 
-        $file = $request->file->store('public/files');
+        $file = $request->file->storeAs('public/files', $request->file->getClientOriginalName());
+
+        Activity::create([
+            'action' => 'New file named ' . $file . ' uploaded to files directory.'
+        ]);
 
         return response()->json($file);
     }
@@ -29,12 +34,15 @@ class FileController extends Controller
     public function delete(Request $request){
         if(Storage::exists($request->file)){
             Storage::delete($request->file);
-            /*
-                Delete Multiple File like this way
-                Storage::delete(['upload/test.png', 'upload/test2.png']);
-            */
+
+            Activity::create([
+                'action' => 'File named ' . $request->file . ' deleted from files directory.'
+            ]);
+
+            return response()->json([], 200);
+
         }else{
-            dd('File does not exists.');
+            return response()->json(['error' => 'File does not exists.'], 500);
         }
     }
 }

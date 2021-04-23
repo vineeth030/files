@@ -1,6 +1,6 @@
 let state = {
     files: [],
-    activity: [],
+    activities: [],
     error:''
 };
 

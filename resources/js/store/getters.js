@@ -4,6 +4,9 @@ let getters = {
     },
     error: state => {
         return state.error
+    },
+    activities: state => {
+        return state.activities
     }
 };
 

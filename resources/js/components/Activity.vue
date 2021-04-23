@@ -3,36 +3,32 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Filename</th>
+            <th scope="col">Date</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Activity</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
+        <tr v-for="(activity, index) in activities">
+            <td v-text="index+1"></td>
+            <td v-text="activity.action"></td>
+            <td v-text="activity.created_at"></td>
         </tr>
         </tbody>
     </table>
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 export default {
-  name: "Activity"
+    name: "Activity",
+    mounted(){
+        this.$store.dispatch('GET_ACTIVITIES');
+    },
+    computed: {
+        ...mapGetters([
+            'activities'
+        ])
+    },
 }
 </script>
 
