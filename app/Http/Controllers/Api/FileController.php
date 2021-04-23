@@ -25,7 +25,7 @@ class FileController extends Controller
         $file = $request->file->storeAs('public/files', $request->file->getClientOriginalName());
 
         Activity::create([
-            'action' => 'New file named ' . $file . ' uploaded to files directory.'
+            'action' => 'New file named ' . basename($file) . ' uploaded to files directory.'
         ]);
 
         return response()->json($file);
@@ -36,7 +36,7 @@ class FileController extends Controller
             Storage::delete($request->file);
 
             Activity::create([
-                'action' => 'File named ' . $request->file . ' deleted from files directory.'
+                'action' => 'File named ' . basename($request->file) . ' deleted from files directory.'
             ]);
 
             return response()->json([], 200);
